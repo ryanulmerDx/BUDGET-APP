@@ -15,6 +15,7 @@ import UserMenu from './auth/UserMenu';
 import HouseholdSelector from './household/HouseholdSelector';
 import CreateHousehold from './household/CreateHousehold';
 import JoinHousehold from './household/JoinHousehold';
+import InviteMembers from './household/InviteMembers';
 
 export default function Dashboard() {
   const { user, loading: authLoading } = useAuth();
@@ -122,6 +123,13 @@ export default function Dashboard() {
             loading={budgetLoading}
           />
         </div>
+
+        {/* Household Invite Code */}
+        {currentHousehold?.invite_code && (
+          <div className="mb-8">
+            <InviteMembers inviteCode={currentHousehold.invite_code} />
+          </div>
+        )}
 
         {/* Show budget overview only if income is set */}
         {budget && budget.income > 0 && (
