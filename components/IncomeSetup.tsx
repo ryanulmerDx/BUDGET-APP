@@ -44,9 +44,9 @@ export default function IncomeSetup({ currentIncome, onIncomeUpdate, loading }: 
 
   return (
     <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/40">
-      <CardHeader>
-        <CardTitle className="text-green-300">Monthly Income</CardTitle>
-        <CardDescription className="text-emerald-200">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-lg sm:text-xl text-green-300">Monthly Income</CardTitle>
+        <CardDescription className="text-sm sm:text-base text-emerald-200">
           Set your monthly income to calculate your 50/20/30 budget
         </CardDescription>
       </CardHeader>
@@ -66,26 +66,26 @@ export default function IncomeSetup({ currentIncome, onIncomeUpdate, loading }: 
                 className="mt-1"
               />
             </div>
-            <div className="flex gap-2">
-              <Button onClick={handleSave} disabled={saving || loading}>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button onClick={handleSave} disabled={saving || loading} className="w-full sm:w-auto">
                 {saving ? 'Saving...' : 'Save'}
               </Button>
               {currentIncome > 0 && (
-                <Button variant="outline" onClick={handleCancel} disabled={saving || loading}>
+                <Button variant="outline" onClick={handleCancel} disabled={saving || loading} className="w-full sm:w-auto">
                   Cancel
                 </Button>
               )}
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
             <div>
-              <p className="text-sm text-emerald-300">Current Monthly Income</p>
-              <p className="text-3xl font-bold text-green-200">
+              <p className="text-xs sm:text-sm text-emerald-300">Current Monthly Income</p>
+              <p className="text-2xl sm:text-3xl font-bold text-green-200">
                 {formatCurrency(currentIncome)}
               </p>
             </div>
-            <Button variant="outline" onClick={handleEdit} disabled={loading} className="border-green-500 text-green-300 hover:bg-green-500/20">
+            <Button variant="outline" onClick={handleEdit} disabled={loading} className="w-full sm:w-auto border-green-500 text-green-300 hover:bg-green-500/20">
               Edit
             </Button>
           </div>

@@ -45,12 +45,12 @@ export default function ExpenseList({ expenses, onDeleteExpense, loading }: Expe
     return (
       <Card className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-purple-500/30">
         <CardHeader>
-          <CardTitle className="text-purple-300">Recent Expenses</CardTitle>
+          <CardTitle className="text-lg sm:text-xl text-purple-300">Recent Expenses</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8 text-purple-300">
-            <p className="text-lg">No expenses yet</p>
-            <p className="text-sm mt-2">Add your first expense above to start tracking</p>
+            <p className="text-base sm:text-lg">No expenses yet</p>
+            <p className="text-xs sm:text-sm mt-2">Add your first expense above to start tracking</p>
           </div>
         </CardContent>
       </Card>
@@ -60,10 +60,10 @@ export default function ExpenseList({ expenses, onDeleteExpense, loading }: Expe
   return (
     <Card className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-purple-500/30">
       <CardHeader>
-        <CardTitle className="text-purple-300">Recent Expenses</CardTitle>
+        <CardTitle className="text-lg sm:text-xl text-purple-300">Recent Expenses</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {categories.map((category) => {
             const categoryExpenses = groupedExpenses[category];
             if (!categoryExpenses || categoryExpenses.length === 0) {
@@ -72,11 +72,11 @@ export default function ExpenseList({ expenses, onDeleteExpense, loading }: Expe
 
             return (
               <div key={category}>
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-blue-300">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-1 sm:gap-0">
+                  <h3 className="text-base sm:text-lg font-semibold text-blue-300">
                     {categoryLabels[category]}
                   </h3>
-                  <span className="text-sm font-medium text-cyan-300">
+                  <span className="text-xs sm:text-sm font-medium text-cyan-300">
                     Total: {formatCurrency(categoryTotals[category])}
                   </span>
                 </div>
@@ -85,27 +85,27 @@ export default function ExpenseList({ expenses, onDeleteExpense, loading }: Expe
                   {categoryExpenses.map((expense) => (
                     <div
                       key={expense.id}
-                      className="flex items-center justify-between p-3 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-lg hover:from-purple-600/30 hover:to-blue-600/30 transition-colors"
+                      className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 p-3 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-lg hover:from-purple-600/30 hover:to-blue-600/30 transition-colors"
                     >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <div className="flex-1">
-                            <p className="font-medium text-white">
+                      <div className="flex-1 w-full">
+                        <div className="flex items-start sm:items-center justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-white text-sm sm:text-base truncate">
                               {expense.description}
                             </p>
-                            <p className="text-sm text-purple-200">
+                            <p className="text-xs sm:text-sm text-purple-200">
                               {new Date(expense.date).toLocaleDateString('en-US', {
                                 month: 'short',
                                 day: 'numeric',
                                 year: 'numeric',
                               })}
                               {expense.profile && expense.profile.full_name && (
-                                <span> • {expense.profile.full_name}</span>
+                                <span className="hidden sm:inline"> • {expense.profile.full_name}</span>
                               )}
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="font-semibold text-cyan-300">
+                            <p className="font-semibold text-cyan-300 text-sm sm:text-base whitespace-nowrap">
                               {formatCurrency(expense.amount)}
                             </p>
                           </div>
@@ -118,7 +118,7 @@ export default function ExpenseList({ expenses, onDeleteExpense, loading }: Expe
                           console.log('Delete clicked for expense:', expense.id);
                           onDeleteExpense(expense.id);
                         }}
-                        className="ml-3"
+                        className="w-full sm:w-auto text-xs sm:text-sm"
                       >
                         Delete
                       </Button>

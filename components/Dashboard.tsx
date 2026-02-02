@@ -50,11 +50,11 @@ export default function Dashboard() {
   if (!currentHousehold) {
     return (
       <div className="min-h-screen bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="mb-8 flex justify-between items-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+          <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-foreground mb-2">Budget Tracker</h1>
-              <p className="text-muted-foreground">Get started by creating or joining a household</p>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">Budget Tracker</h1>
+              <p className="text-sm sm:text-base text-muted-foreground">Get started by creating or joining a household</p>
             </div>
             <UserMenu />
           </div>
@@ -86,27 +86,31 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
-        <div className="mb-8 flex justify-between items-start">
-          <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">Budget Tracker</h1>
-            <p className="text-muted-foreground">Managing your finances with the 50/20/30 rule</p>
-            <p className="text-sm text-muted-foreground mt-1">
-              Current Month:{' '}
-              {new Date(currentMonth + '-01').toLocaleDateString('en-US', {
-                month: 'long',
-                year: 'numeric',
-              })}
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <HouseholdSelector
-              households={households}
-              currentHousehold={currentHousehold}
-              onSelectHousehold={switchHousehold}
-            />
-            <UserMenu />
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">Budget Tracker</h1>
+              <p className="text-sm sm:text-base text-muted-foreground">Managing your finances with the 50/20/30 rule</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Current Month:{' '}
+                {new Date(currentMonth + '-01').toLocaleDateString('en-US', {
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </p>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+              <div className="flex-1 sm:flex-initial">
+                <HouseholdSelector
+                  households={households}
+                  currentHousehold={currentHousehold}
+                  onSelectHousehold={switchHousehold}
+                />
+              </div>
+              <UserMenu />
+            </div>
           </div>
         </div>
 

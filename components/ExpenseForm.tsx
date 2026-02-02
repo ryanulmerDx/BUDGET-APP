@@ -63,9 +63,9 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
 
   return (
     <Card className="bg-gradient-to-br from-orange-900/30 to-amber-900/30 border-orange-500/40">
-      <CardHeader>
-        <CardTitle className="text-orange-300">Add Expense</CardTitle>
-        <CardDescription className="text-amber-200">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-lg sm:text-xl text-orange-300">Add Expense</CardTitle>
+        <CardDescription className="text-sm sm:text-base text-amber-200">
           Track your spending by adding expenses to each category
         </CardDescription>
       </CardHeader>
@@ -131,7 +131,7 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
             </div>
           </div>
 
-          <Button type="submit" className="w-full md:w-auto" disabled={adding}>
+          <Button type="submit" className="w-full sm:w-auto" disabled={adding}>
             {adding ? 'Adding...' : 'Add Expense'}
           </Button>
         </form>

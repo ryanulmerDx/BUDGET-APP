@@ -26,14 +26,14 @@ export default function BudgetCharts({ categoryBudgets }: BudgetChartsProps) {
   }));
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
       {/* Pie Chart - Budget Allocation */}
       <Card className="bg-card border-border">
         <CardHeader>
-          <CardTitle className="text-primary">Budget Allocation</CardTitle>
+          <CardTitle className="text-sm sm:text-base lg:text-lg text-primary">Budget Allocation</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
                 data={pieData}
@@ -64,10 +64,10 @@ export default function BudgetCharts({ categoryBudgets }: BudgetChartsProps) {
       {/* Bar Chart - Spending vs Budget */}
       <Card className="bg-card border-border">
         <CardHeader>
-          <CardTitle className="text-accent">Spending vs Budget</CardTitle>
+          <CardTitle className="text-sm sm:text-base lg:text-lg text-accent">Spending vs Budget</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={barData}>
               <XAxis
                 dataKey="name"

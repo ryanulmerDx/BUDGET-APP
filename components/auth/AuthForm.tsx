@@ -45,9 +45,9 @@ export default function AuthForm({ mode }: AuthFormProps) {
 
   return (
     <Card className="w-full max-w-md bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600 border-0 shadow-2xl shadow-purple-500/50">
-      <CardHeader>
-        <CardTitle className="text-white text-2xl">{mode === 'login' ? 'Welcome Back' : 'Create Account'}</CardTitle>
-        <CardDescription className="text-purple-100">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-white text-xl sm:text-2xl">{mode === 'login' ? 'Welcome Back' : 'Create Account'}</CardTitle>
+        <CardDescription className="text-purple-100 text-sm sm:text-base">
           {mode === 'login'
             ? 'Sign in to manage your household budget'
             : 'Sign up to start tracking your budget with your household'}

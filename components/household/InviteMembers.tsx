@@ -26,13 +26,13 @@ export default function InviteMembers({ inviteCode }: InviteMembersProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center gap-4">
-          <div className="flex-1 text-center">
-            <div className="text-4xl font-bold tracking-widest bg-cyan-500/20 text-cyan-100 py-6 rounded-lg border border-cyan-500/30">
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex-1 w-full text-center">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-widest bg-cyan-500/20 text-cyan-100 py-4 sm:py-6 rounded-lg border border-cyan-500/30">
               {inviteCode}
             </div>
           </div>
-          <Button onClick={handleCopy} className="bg-cyan-600 hover:bg-cyan-500 text-white">
+          <Button onClick={handleCopy} className="bg-cyan-600 hover:bg-cyan-500 text-white w-full sm:w-auto">
             {copied ? 'Copied!' : 'Copy Code'}
           </Button>
         </div>

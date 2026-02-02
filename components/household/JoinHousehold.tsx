@@ -32,9 +32,9 @@ export default function JoinHousehold({ onJoinHousehold }: JoinHouseholdProps) {
 
   return (
     <Card className="bg-gradient-to-br from-pink-600 via-rose-600 to-orange-600 border-0 shadow-2xl shadow-pink-500/50">
-      <CardHeader>
-        <CardTitle className="text-white text-2xl">Join a Household</CardTitle>
-        <CardDescription className="text-pink-100">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-white text-xl sm:text-2xl">Join a Household</CardTitle>
+        <CardDescription className="text-pink-100 text-sm sm:text-base">
           Have an invite code? Enter it below to join an existing household.
         </CardDescription>
       </CardHeader>

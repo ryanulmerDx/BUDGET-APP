@@ -32,9 +32,9 @@ export default function CreateHousehold({ onCreateHousehold }: CreateHouseholdPr
 
   return (
     <Card className="bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 border-0 shadow-2xl shadow-blue-500/50">
-      <CardHeader>
-        <CardTitle className="text-white text-2xl">Create Your Household</CardTitle>
-        <CardDescription className="text-blue-100">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-white text-xl sm:text-2xl">Create Your Household</CardTitle>
+        <CardDescription className="text-blue-100 text-sm sm:text-base">
           Start tracking your budget by creating a household. You can invite others to join later.
         </CardDescription>
       </CardHeader>
