@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/select';
 
 interface ExpenseFormProps {
-  onAddExpense: (expense: Expense) => void;
+  onAddExpense: (expense: { category: CategoryType; description: string; amount: number; date: string }) => Promise<void>;
 }
 
 export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
@@ -23,8 +23,9 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [adding, setAdding] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validation
@@ -44,17 +45,14 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
       return;
     }
 
-    // Create expense object
-    const expense: Expense = {
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    setAdding(true);
+    await onAddExpense({
       category,
       description: description.trim(),
       amount: parsedAmount,
       date,
-      timestamp: Date.now(),
-    };
-
-    onAddExpense(expense);
+    });
+    setAdding(false);
 
     // Reset form
     setDescription('');
@@ -64,10 +62,10 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
   };
 
   return (
-    <Card>
+    <Card className="bg-gradient-to-br from-orange-900/30 to-amber-900/30 border-orange-500/40">
       <CardHeader>
-        <CardTitle>Add Expense</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-orange-300">Add Expense</CardTitle>
+        <CardDescription className="text-amber-200">
           Track your spending by adding expenses to each category
         </CardDescription>
       </CardHeader>
@@ -83,7 +81,8 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="needs">🏠 Needs</SelectItem>
-                  <SelectItem value="wants">🎉 Wants</SelectItem>
+                  <SelectItem value="ryan_spend">👤 Ryan Spend</SelectItem>
+                  <SelectItem value="seneca_spend">👥 Seneca Spend</SelectItem>
                   <SelectItem value="savings">💰 Savings</SelectItem>
                 </SelectContent>
               </Select>
@@ -132,8 +131,8 @@ export default function ExpenseForm({ onAddExpense }: ExpenseFormProps) {
             </div>
           </div>
 
-          <Button type="submit" className="w-full md:w-auto">
-            Add Expense
+          <Button type="submit" className="w-full md:w-auto" disabled={adding}>
+            {adding ? 'Adding...' : 'Add Expense'}
           </Button>
         </form>
       </CardContent>

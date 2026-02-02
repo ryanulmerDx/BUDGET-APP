@@ -9,14 +9,16 @@ import { formatCurrency } from '@/lib/calculations';
 
 interface IncomeSetupProps {
   currentIncome: number;
-  onIncomeUpdate: (income: number) => void;
+  onIncomeUpdate: (income: number) => Promise<void>;
+  loading?: boolean;
 }
 
-export default function IncomeSetup({ currentIncome, onIncomeUpdate }: IncomeSetupProps) {
+export default function IncomeSetup({ currentIncome, onIncomeUpdate, loading }: IncomeSetupProps) {
   const [isEditing, setIsEditing] = useState(currentIncome === 0);
   const [incomeInput, setIncomeInput] = useState(currentIncome.toString());
+  const [saving, setSaving] = useState(false);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const parsedIncome = parseFloat(incomeInput);
 
     if (isNaN(parsedIncome) || parsedIncome < 0) {
@@ -24,7 +26,9 @@ export default function IncomeSetup({ currentIncome, onIncomeUpdate }: IncomeSet
       return;
     }
 
-    onIncomeUpdate(parsedIncome);
+    setSaving(true);
+    await onIncomeUpdate(parsedIncome);
+    setSaving(false);
     setIsEditing(false);
   };
 
@@ -39,11 +43,11 @@ export default function IncomeSetup({ currentIncome, onIncomeUpdate }: IncomeSet
   };
 
   return (
-    <Card>
+    <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/40">
       <CardHeader>
-        <CardTitle>Monthly Income</CardTitle>
-        <CardDescription>
-          Set your monthly income to calculate your 50/30/20 budget
+        <CardTitle className="text-green-300">Monthly Income</CardTitle>
+        <CardDescription className="text-emerald-200">
+          Set your monthly income to calculate your 50/20/30 budget
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -63,9 +67,11 @@ export default function IncomeSetup({ currentIncome, onIncomeUpdate }: IncomeSet
               />
             </div>
             <div className="flex gap-2">
-              <Button onClick={handleSave}>Save</Button>
+              <Button onClick={handleSave} disabled={saving || loading}>
+                {saving ? 'Saving...' : 'Save'}
+              </Button>
               {currentIncome > 0 && (
-                <Button variant="outline" onClick={handleCancel}>
+                <Button variant="outline" onClick={handleCancel} disabled={saving || loading}>
                   Cancel
                 </Button>
               )}
@@ -74,12 +80,12 @@ export default function IncomeSetup({ currentIncome, onIncomeUpdate }: IncomeSet
         ) : (
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-500">Current Monthly Income</p>
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-sm text-emerald-300">Current Monthly Income</p>
+              <p className="text-3xl font-bold text-green-200">
                 {formatCurrency(currentIncome)}
               </p>
             </div>
-            <Button variant="outline" onClick={handleEdit}>
+            <Button variant="outline" onClick={handleEdit} disabled={loading} className="border-green-500 text-green-300 hover:bg-green-500/20">
               Edit
             </Button>
           </div>

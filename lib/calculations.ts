@@ -2,9 +2,10 @@ import { CategoryType, CategoryBudget, Expense } from '@/types';
 
 export function calculateBudgetSplit(income: number) {
   return {
-    needs: income * 0.5,      // 50%
-    wants: income * 0.3,      // 30%
-    savings: income * 0.2,    // 20%
+    needs: income * 0.5,           // 50%
+    ryan_spend: income * 0.1,      // 10%
+    seneca_spend: income * 0.1,    // 10%
+    savings: income * 0.3,         // 30%
   };
 }
 
@@ -14,7 +15,8 @@ export function calculateCategoryTotals(
 ): Record<CategoryType, number> {
   const totals: Record<CategoryType, number> = {
     needs: 0,
-    wants: 0,
+    ryan_spend: 0,
+    seneca_spend: 0,
     savings: 0,
   };
 
@@ -47,17 +49,25 @@ export function calculateCategoryBudgets(
       remaining: split.needs - totals.needs,
     },
     {
-      category: 'wants',
-      label: 'Wants',
-      percentage: 30,
-      allocated: split.wants,
-      spent: totals.wants,
-      remaining: split.wants - totals.wants,
+      category: 'ryan_spend',
+      label: 'Ryan Spend',
+      percentage: 10,
+      allocated: split.ryan_spend,
+      spent: totals.ryan_spend,
+      remaining: split.ryan_spend - totals.ryan_spend,
+    },
+    {
+      category: 'seneca_spend',
+      label: 'Seneca Spend',
+      percentage: 10,
+      allocated: split.seneca_spend,
+      spent: totals.seneca_spend,
+      remaining: split.seneca_spend - totals.seneca_spend,
     },
     {
       category: 'savings',
       label: 'Savings',
-      percentage: 20,
+      percentage: 30,
       allocated: split.savings,
       spent: totals.savings,
       remaining: split.savings - totals.savings,
@@ -80,7 +90,8 @@ export function getSpendingPercentage(spent: number, allocated: number): number 
 }
 
 export function getProgressColor(percentage: number): string {
-  if (percentage < 75) return 'bg-green-500';
-  if (percentage < 90) return 'bg-yellow-500';
-  return 'bg-red-500';
+  // Vibrant theme - colors change based on usage
+  if (percentage < 75) return 'bg-blue-500'; // Blue for good
+  if (percentage < 90) return 'bg-purple-500'; // Purple for warning
+  return 'bg-pink-500'; // Pink for high usage
 }

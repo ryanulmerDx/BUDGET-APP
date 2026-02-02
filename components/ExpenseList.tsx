@@ -7,16 +7,18 @@ import { formatCurrency } from '@/lib/calculations';
 
 interface ExpenseListProps {
   expenses: Expense[];
-  onDeleteExpense: (expenseId: string) => void;
+  onDeleteExpense: (expenseId: string) => Promise<void>;
+  loading?: boolean;
 }
 
 const categoryLabels: Record<CategoryType, string> = {
   needs: '🏠 Needs',
-  wants: '🎉 Wants',
+  ryan_spend: '👤 Ryan Spend',
+  seneca_spend: '👥 Seneca Spend',
   savings: '💰 Savings',
 };
 
-export default function ExpenseList({ expenses, onDeleteExpense }: ExpenseListProps) {
+export default function ExpenseList({ expenses, onDeleteExpense, loading }: ExpenseListProps) {
   // Sort expenses by date (newest first)
   const sortedExpenses = [...expenses].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -37,16 +39,16 @@ export default function ExpenseList({ expenses, onDeleteExpense }: ExpenseListPr
     return acc;
   }, {} as Record<CategoryType, number>);
 
-  const categories: CategoryType[] = ['needs', 'wants', 'savings'];
+  const categories: CategoryType[] = ['needs', 'ryan_spend', 'seneca_spend', 'savings'];
 
   if (expenses.length === 0) {
     return (
-      <Card>
+      <Card className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-purple-500/30">
         <CardHeader>
-          <CardTitle>Recent Expenses</CardTitle>
+          <CardTitle className="text-purple-300">Recent Expenses</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-8 text-purple-300">
             <p className="text-lg">No expenses yet</p>
             <p className="text-sm mt-2">Add your first expense above to start tracking</p>
           </div>
@@ -56,9 +58,9 @@ export default function ExpenseList({ expenses, onDeleteExpense }: ExpenseListPr
   }
 
   return (
-    <Card>
+    <Card className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-purple-500/30">
       <CardHeader>
-        <CardTitle>Recent Expenses</CardTitle>
+        <CardTitle className="text-purple-300">Recent Expenses</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
@@ -71,10 +73,10 @@ export default function ExpenseList({ expenses, onDeleteExpense }: ExpenseListPr
             return (
               <div key={category}>
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-blue-300">
                     {categoryLabels[category]}
                   </h3>
-                  <span className="text-sm font-medium text-gray-600">
+                  <span className="text-sm font-medium text-cyan-300">
                     Total: {formatCurrency(categoryTotals[category])}
                   </span>
                 </div>
@@ -83,34 +85,40 @@ export default function ExpenseList({ expenses, onDeleteExpense }: ExpenseListPr
                   {categoryExpenses.map((expense) => (
                     <div
                       key={expense.id}
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="flex items-center justify-between p-3 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-lg hover:from-purple-600/30 hover:to-blue-600/30 transition-colors"
                     >
                       <div className="flex-1">
                         <div className="flex items-center gap-3">
                           <div className="flex-1">
-                            <p className="font-medium text-gray-900">
+                            <p className="font-medium text-white">
                               {expense.description}
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-purple-200">
                               {new Date(expense.date).toLocaleDateString('en-US', {
                                 month: 'short',
                                 day: 'numeric',
                                 year: 'numeric',
                               })}
+                              {expense.profile && expense.profile.full_name && (
+                                <span> • {expense.profile.full_name}</span>
+                              )}
                             </p>
                           </div>
                           <div className="text-right">
-                            <p className="font-semibold text-gray-900">
+                            <p className="font-semibold text-cyan-300">
                               {formatCurrency(expense.amount)}
                             </p>
                           </div>
                         </div>
                       </div>
                       <Button
-                        variant="ghost"
+                        variant="destructive"
                         size="sm"
-                        onClick={() => onDeleteExpense(expense.id)}
-                        className="ml-3 text-red-600 hover:text-red-700 hover:bg-red-50"
+                        onClick={() => {
+                          console.log('Delete clicked for expense:', expense.id);
+                          onDeleteExpense(expense.id);
+                        }}
+                        className="ml-3"
                       >
                         Delete
                       </Button>

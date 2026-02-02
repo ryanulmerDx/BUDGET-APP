@@ -1,20 +1,20 @@
-# Budget Tracker - 50/30/20 Rule
+# Budget Tracker - 50/20/30 Rule
 
-A modern budgeting application built with Next.js that helps you manage your finances using the popular 50/30/20 budgeting rule.
+A modern budgeting application built with Next.js that helps you manage your finances using the popular 50/20/30 budgeting rule.
 
-## About the 50/30/20 Rule
+## About the 50/20/30 Rule
 
-The 50/30/20 rule is a simple budgeting framework that divides your after-tax income into three categories:
+The 50/20/30 rule is a simple budgeting framework that divides your after-tax income into three categories:
 
 - **50% Needs** - Essential expenses like rent, utilities, groceries, and insurance
-- **30% Wants** - Discretionary spending like dining out, entertainment, and hobbies
-- **20% Savings** - Emergency fund, investments, and debt payoff
+- **20% Spend** - Discretionary spending like dining out, entertainment, and hobbies
+- **30% Savings** - Emergency fund, investments, and debt payoff
 
 ## Features
 
 - **Income Management**: Set and update your monthly income with an intuitive interface
-- **Automatic Budget Calculation**: Automatically calculates your 50/30/20 budget split
-- **Expense Tracking**: Add and categorize expenses across Needs, Wants, and Savings
+- **Automatic Budget Calculation**: Automatically calculates your 50/20/30 budget split
+- **Expense Tracking**: Add and categorize expenses across Needs, Spend, and Savings
 - **Visual Progress Bars**: Color-coded progress indicators showing spending vs. budget
   - Green: Under 75% spent
   - Yellow: 75-90% spent
@@ -95,7 +95,7 @@ npm start
 ## How to Use
 
 1. **Set Your Income**: Enter your monthly after-tax income in the Income Setup card
-2. **View Your Budget**: See your automatic 50/30/20 split across the three categories
+2. **View Your Budget**: See your automatic 50/20/30 split across the three categories
 3. **Add Expenses**: Use the Add Expense form to track your spending
    - Select a category (Needs, Wants, or Savings)
    - Enter the amount and description

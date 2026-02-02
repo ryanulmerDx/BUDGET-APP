@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Budget Tracker - 50/30/20 Rule",
-  description: "Manage your finances with the 50/30/20 budgeting rule. Track income, expenses, and stay on budget.",
+  title: "Budget Tracker - 50/20/30",
+  description: "Manage your finances with the 50/20/30 budgeting rule. Track income, expenses, and stay on budget with vibrant visualizations.",
 };
 
 export default function RootLayout({
