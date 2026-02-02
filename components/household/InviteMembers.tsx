@@ -18,21 +18,21 @@ export default function InviteMembers({ inviteCode }: InviteMembersProps) {
   };
 
   return (
-    <Card>
+    <Card className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-cyan-500/40">
       <CardHeader>
-        <CardTitle>Invite Members</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-cyan-300">Invite Members</CardTitle>
+        <CardDescription className="text-blue-200">
           Share this code with family members to invite them to your household
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-4">
           <div className="flex-1 text-center">
-            <div className="text-3xl font-bold tracking-widest bg-gray-100 py-4 rounded-lg">
+            <div className="text-4xl font-bold tracking-widest bg-cyan-500/20 text-cyan-100 py-6 rounded-lg border border-cyan-500/30">
               {inviteCode}
             </div>
           </div>
-          <Button onClick={handleCopy} variant="outline">
+          <Button onClick={handleCopy} className="bg-cyan-600 hover:bg-cyan-500 text-white">
             {copied ? 'Copied!' : 'Copy Code'}
           </Button>
         </div>
